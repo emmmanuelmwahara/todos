@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "59797190296",
+    "firebase_url": "https://todos-b9b9f-default-rtdb.firebaseio.com",
+    "project_id": "todos-b9b9f",
+    "storage_bucket": "todos-b9b9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59797190296:android:ba4d85104b8403c483c2ed",
+        "android_client_info": {
+          "package_name": "com.cumawa.todos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59797190296-352q7n54g7m1fko365lj56bbjfes9vn1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cumawa.todos",
+            "certificate_hash": "62acfa6db37a9a04493449f7ed96301c7e4a2f59"
+          }
+        },
+        {
+          "client_id": "59797190296-c76nh8nhk4p5prsrs41cn9tskgj8i6du.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKCl1ax1cpsElrBwzeXj4V3TBb2MxJLbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59797190296-c76nh8nhk4p5prsrs41cn9tskgj8i6du.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
