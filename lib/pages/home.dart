@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/cupertino.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:todos/models/models.dart';
 import 'package:todos/models/ui_models.dart';
@@ -16,6 +16,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<Todo> todos = [];
   var finalText = '';
+  final _database = FirebaseDatabase.instance.reference();
+
+  @override
+  void initState() {
+    super.initState();
+    _database.child('orders').onValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +43,32 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: ListView(children: todos.map((e) => TodoTile(todo: e)).toList()),
+      body: StreamBuilder(
+          stream: _database.child('todos').onValue,
+          builder: (context, AsyncSnapshot snapshot) {
+            final todoList = <TodoTile>[];
+            if (snapshot.hasData) {
+              var event = snapshot.data! as Event;
+              final todos = Map<String, dynamic>.from(event.snapshot.value);
+              todos.forEach((key, value) {
+                final nextTodo =
+                    Todo.fromRTDB(Map<String, dynamic>.from(value));
+                final todoTile = TodoTile(
+                    todo: Todo(
+                  path: nextTodo.path,
+                  title: nextTodo.title,
+                  isDone: nextTodo.isDone,
+                  // timeStamp: nextTodo.timeStamp,
+                ));
+                todoList.add(todoTile);
+              });
+              return ListView(
+                children: todoList,
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          }),
       // backgroundColor: const Color.fromRGBO(29, 51, 84, 1),
       backgroundColor: const Color.fromRGBO(29, 112, 162, 1),
       floatingActionButton: FloatingActionButton(
@@ -92,10 +125,13 @@ class _HomeState extends State<Home> {
                           onPressed: () {
                             if (finalText.isNotEmpty) {
                               setState(() {
-                                todos.add(Todo(
-                                    title: finalText,
-                                    isDone: false,
-                                    timeStamp: DateTime.now()));
+                                String id = _database.child('todos').push().key;
+                                _database.child('todos').child(id).set({
+                                  "title": finalText,
+                                  "isDone": false,
+                                  "id": id,
+                                  // "timeStamp": DateTime.now()
+                                });
                               });
                             }
                             Navigator.of(context).pop();

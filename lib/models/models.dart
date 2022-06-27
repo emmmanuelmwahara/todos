@@ -1,28 +1,36 @@
 //models
 
+import 'package:firebase_database/firebase_database.dart';
+
 class Todo {
   final String? title;
+  String path;
   bool isDone;
-  final int id = val;
-  final DateTime? timeStamp;
-  static int val = 0;
+  // final DateTime timeStamp;
 
   Todo({
     required this.title,
-    this.timeStamp,
+    // required this.timeStamp,
     this.isDone = false,
-  }) {
-    val++;
-    print(val);
-  }
+    required this.path,
+  });
 
   factory Todo.fromRTDB(Map<String, dynamic> data) {
     return Todo(
-        title: data['title'],
-        isDone: data['isDone'],
-        timeStamp: data['timestamp']);
+      title: data['title'] ?? 'some task',
+      isDone: data['isDone'] ?? false,
+      path: data['id'],
+      // timeStamp: (data['time'] != null)
+      //     ? DateTime.fromMillisecondsSinceEpoch(data['time'])
+      //     : DateTime.now()
+    );
   }
+
   void toggleIsDone() {
+    // print(path);
     isDone = !isDone;
+    FirebaseDatabase.instance.reference().child('todos').child(path).update({
+      "isDone": isDone,
+    });
   }
 }

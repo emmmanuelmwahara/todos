@@ -127,17 +127,10 @@ class _AuthenticateState extends State<Authenticate> {
                 width: double.infinity,
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade900,
-                    //borderRadius: BorderRadius.vertical(bottom: Radius.circular(10),),
-                  ),
-                  // child: Image.asset('images/Smartfarms exports/logo_1.png'),
-                  child: const ColoredBox(
-                    color: Colors.blue,
-                  ),
+                  child: Image.asset('assets/images/hold.jpg'),
                 ),
               ),
-              const Spacer()
+              // const Spacer()
             ],
           ),
           Positioned(

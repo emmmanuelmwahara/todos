@@ -17,36 +17,27 @@ class _TodoTileState extends State<TodoTile> {
   late bool tempDone;
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: ValueKey(widget.todo.id),
-      background: Container(
-        color: Colors.red,
-        child: const Icon(Icons.delete),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12),
-        child: CheckboxListTile(
-          value: widget.todo.isDone,
-          onChanged: (bool? value) {
-            setState(() {
-              // _checked = value!;
-              widget.todo.toggleIsDone();
-            });
-          },
-          title: Text(
-            widget.todo.title!,
-            style: TextStyle(
-              color: widget.todo.isDone ? Colors.green : Colors.white,
-              fontSize: 22,
-              decoration:
-                  widget.todo.isDone ? TextDecoration.lineThrough : null,
-            ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12),
+      child: CheckboxListTile(
+        value: widget.todo.isDone,
+        onChanged: (bool? value) {
+          setState(() {
+            // _checked = value!;
+            widget.todo.toggleIsDone();
+          });
+        },
+        title: Text(
+          widget.todo.title!,
+          style: TextStyle(
+            color: widget.todo.isDone ? Colors.green : Colors.white,
+            fontSize: 22,
+            decoration: widget.todo.isDone ? TextDecoration.lineThrough : null,
           ),
-          // tileColor: const Color.fromRGBO(109, 174, 219, 1),
-          tileColor: const Color.fromRGBO(29, 51, 84, 1),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
+        // tileColor: const Color.fromRGBO(109, 174, 219, 1),
+        tileColor: const Color.fromRGBO(29, 51, 84, 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
     );
   }
