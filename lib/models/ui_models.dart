@@ -20,12 +20,10 @@ class _TodoTileState extends State<TodoTile> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12),
       child: CheckboxListTile(
+        controlAffinity: ListTileControlAffinity.leading,
         value: widget.todo.isDone,
         onChanged: (bool? value) {
-          setState(() {
-            // _checked = value!;
-            widget.todo.toggleIsDone();
-          });
+          widget.todo.toggleIsDone();
         },
         title: Text(
           widget.todo.title!,
@@ -37,6 +35,9 @@ class _TodoTileState extends State<TodoTile> {
         ),
         // tileColor: const Color.fromRGBO(109, 174, 219, 1),
         tileColor: const Color.fromRGBO(29, 51, 84, 1),
+        checkboxShape: const CircleBorder(),
+        checkColor: Colors.blue,
+        selectedTileColor: Colors.blue,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
     );
